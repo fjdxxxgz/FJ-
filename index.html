@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>信息工作视窗</title>
+<title>信息工作台</title>
 <style>
 
 /* ========== 重置与基础 ========== */
@@ -169,7 +169,45 @@ img{max-width:100%;display:block}
 .score-table td.rank-3{color:#CD7F32;font-weight:700}
 .score-table-title{font-size:var(--fs-base);font-weight:700;color:var(--text-primary);padding:14px 0 10px;border-bottom:2px solid var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .score-table-title .tag{font-size:calc(var(--fs-base) - 4px);background:var(--primary-bg);color:var(--primary);padding:2px 8px;border-radius:6px}
+.score-rules-card{line-height:1.9;color:var(--text-primary)}
+.score-rules-title{font-size:calc(var(--fs-base) + 2px);font-weight:700;color:var(--primary);border-bottom:2px solid var(--primary);padding-bottom:10px;margin-bottom:16px}
+.score-rules-section{margin-bottom:18px}
+.score-rules-section:last-child{margin-bottom:0}
+.score-rules-head{font-weight:700;color:var(--text-primary);margin-bottom:6px;font-size:var(--fs-base)}
+.score-rules-card p{margin:6px 0;text-align:justify}
 .table-count-badge{font-size:calc(var(--fs-base) - 3px);color:var(--text-muted);background:var(--primary-bg);padding:2px 10px;border-radius:10px;margin-left:8px}
+
+/* ========== 集团信息采用情况看板模块 ========== */
+.gs-summary-card{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.gs-summary-item{flex:1;min-width:120px;text-align:center;padding:6px 4px;border-right:1px dashed var(--border)}
+.gs-summary-item:last-child{border-right:none}
+.gs-summary-num{font-size:32px;font-weight:700;color:var(--primary);line-height:1.2}
+.gs-summary-label{font-size:calc(var(--fs-base) - 2px);color:var(--text-muted);margin-top:4px}
+.gs-chart-title{font-size:var(--fs-base);font-weight:700;color:var(--text-primary);padding:14px 0 10px;border-bottom:2px solid var(--primary);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.gs-chart-wrap{padding:4px 0 0}
+.gs-bar-chart{display:flex;align-items:flex-end;gap:14px;overflow-x:auto;padding-bottom:6px}
+.gs-bar-item{flex:1;min-width:64px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.gs-bar-value{font-size:calc(var(--fs-base) + 1px);font-weight:700;color:var(--text-primary);margin-bottom:6px}
+.gs-bar-track{width:70%;max-width:56px;height:220px;display:flex;align-items:flex-end;background:var(--primary-bg);border-radius:6px 6px 0 0;overflow:hidden}
+.gs-bar-fill{width:100%;border-radius:6px 6px 0 0;transition:height .3s ease;min-height:4px}
+.gs-bar-label{font-size:calc(var(--fs-base) - 2px);color:var(--text-secondary);margin-top:8px;text-align:center;line-height:1.4;max-width:88px;white-space:normal;word-break:break-all}
+.gs-chart-hint{font-size:calc(var(--fs-base) - 3px);color:var(--text-muted);text-align:right;margin-top:10px;padding-top:8px;border-top:1px dashed var(--border)}
+.gs-bar-item{cursor:pointer;transition:transform .15s ease}
+.gs-bar-item:hover{transform:translateY(-3px)}
+.gs-bar-item:hover .gs-bar-label{color:var(--primary);font-weight:600}
+.gs-bar-item.selected .gs-bar-track{outline:2px solid var(--primary);outline-offset:2px;border-radius:8px 8px 0 0}
+.gs-bar-item.selected .gs-bar-value{color:var(--primary);font-size:calc(var(--fs-base) + 2px)}
+.gs-bar-item.selected .gs-bar-label{color:var(--primary);font-weight:700}
+.gs-detail-card{animation:gsSlideIn .25s ease}
+@keyframes gsSlideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.gs-detail-title{font-size:var(--fs-base);font-weight:700;color:var(--text-primary);padding:14px 0 10px;border-bottom:2px solid var(--primary);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.gs-detail-count{font-size:calc(var(--fs-base) - 2px);color:var(--text-muted);margin-bottom:12px}
+.gs-detail-list{display:flex;flex-direction:column;gap:10px}
+.gs-detail-item{display:flex;align-items:flex-start;gap:12px;background:var(--primary-bg);border-radius:var(--radius);padding:10px 14px}
+.gs-detail-idx{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:calc(var(--fs-base) - 4px);font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.gs-detail-body{flex:1;min-width:0}
+.gs-detail-name{font-size:var(--fs-base);color:var(--text-primary);line-height:1.6;font-weight:600}
+.gs-detail-unit{font-size:calc(var(--fs-base) - 2px);color:var(--text-secondary);margin-top:2px}
 
 /* ========== 信息知识库模块 ========== */
 .kb-l1-tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:3px solid var(--border)}
@@ -273,10 +311,20 @@ img{max-width:100%;display:block}
   .modal{max-width:100%;max-height:95vh}
   .wizard-step-label{font-size:11px}
   .point-card .point-tools{opacity:1}
+  .gs-summary-card{flex-direction:column}
+  .gs-summary-item{border-right:none;border-bottom:1px dashed var(--border);padding:10px 4px}
+  .gs-summary-item:last-child{border-bottom:none}
+  .gs-bar-track{height:170px}
+  .gs-bar-item{min-width:56px}
+  .gs-detail-item{padding:8px 12px}
 }
 @media(max-width:480px){
   .content{padding:12px}
   .cal-months-grid{gap:12px}
+  .gs-bar-chart{gap:8px}
+  .gs-bar-item{min-width:48px}
+  .gs-bar-track{height:130px}
+  .gs-detail-name{font-size:calc(var(--fs-base) - 1px)}
 }
 
 /* 滚动条 */
@@ -292,7 +340,7 @@ img{max-width:100%;display:block}
 </head>
 <body>
 <div class="app">
-  <div class="topnav-brand-bar"><h1>信息工作视窗</h1></div>
+  <div class="topnav-brand-bar"><h1>信息工作台</h1></div>
   <nav class="topnav" id="topnav">
     <a class="nav-item active" data-page="points">
       <svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>
@@ -301,6 +349,10 @@ img{max-width:100%;display:block}
     <a class="nav-item" data-page="scores">
       <svg viewBox="0 0 24 24"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg>
       <span>信息得分情况</span>
+    </a>
+    <a class="nav-item" data-page="groupstats">
+      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      <span>集团信息采用情况看板</span>
     </a>
     <a class="nav-item" data-page="knowledge">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
@@ -325,19 +377,19 @@ img{max-width:100%;display:block}
   <div class="content" id="content"></div>
 </div>
 <script>
-var PUB_DATA = {"points":[{"id":1786667727159,"createdAt":"2026-08-14T00:35:27.159Z","category":"近期信息要点","title":"渠道建营、场景化营销、战略平台插旗、AI+行动、Token经营、“一降两升”等领域阶段性成效","content":"","image":null,"updatedAt":"2026-08-14T07:44:35.455Z"},{"id":1786675983849,"category":"近期集团重点关注","title":"“息壤、Tokenhub、TeleAgent、智能化穿透式监管、低空、XC、视联网”等重点平台的市场卡位进展情况","content":"","image":null,"createdAt":"2026-08-14T02:53:03.849Z","updatedAt":"2026-08-14T07:44:07.718Z"}],"scoreData":{"sheetName":"Sheet1","tables":[{"title":"表格 1","rows":[["分公司","报送情况","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","省市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-8月得分"],["","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["厦门","64","35","0","0","0","2","0","1","1","1","2","1","2","0","165"],["南平","28","25","1","0","0","2","0","16","0","0","1","0","2","3","147"],["漳州","22","16","1","0","0","2","0","2","0","0","3","2","1","1","102"],["泉州","32","25","0","0","0","1","0","0","1","0","0","0","0","0","91"],["莆田","14","12","1","0","0","0","0","7","0","0","1","0","1","0","63"],["福州","23","16","0","0","0","0","0","0","0","0","0","0","0","0","48"],["宁德","25","15","0","0","2","0","0","0","0","0","0","0","0","0","48"],["龙岩","16","13","0","0","2","0","0","0","0","0","0","0","0","0","42"],["三明","17","12","0","0","0","0","0","0","0","0","0","0","1","0","42"]],"tab":"地市","merges":[{"sr":1,"sc":1,"er":2,"ec":1},{"sr":1,"sc":2,"er":2,"ec":2},{"sr":1,"sc":9,"er":2,"ec":9},{"sr":1,"sc":10,"er":2,"ec":10},{"sr":1,"sc":11,"er":2,"ec":11},{"sr":1,"sc":16,"er":2,"ec":16}]},{"title":"表格 1","rows":[["直报点","报送情况","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-8月得分"],["","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["思明","7","3","0","0","0","1","0","0","0","0","0","0","0","0","15"],["晋江","4","3","0","0","0","0","0","0","0","0","0","0","0","0","9"],["海沧","5","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["惠安","4","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["福清","2","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["仙游","2","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["新罗","5","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["武夷山","1","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["鼓楼","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["霞浦","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["龙海","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["永安","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]],"tab":"直报点","merges":[{"sr":1,"sc":1,"er":2,"ec":1},{"sr":1,"sc":2,"er":2,"ec":2},{"sr":1,"sc":9,"er":2,"ec":9},{"sr":1,"sc":10,"er":2,"ec":10},{"sr":1,"sc":11,"er":2,"ec":11},{"sr":1,"sc":16,"er":2,"ec":16}]}],"rawRows":[["分公司","报送情况","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","省市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-8月得分"],["","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["厦门","64","35","0","0","0","2","0","1","1","1","2","1","2","0","165"],["南平","28","25","1","0","0","2","0","16","0","0","1","0","2","3","147"],["漳州","22","16","1","0","0","2","0","2","0","0","3","2","1","1","102"],["泉州","32","25","0","0","0","1","0","0","1","0","0","0","0","0","91"],["莆田","14","12","1","0","0","0","0","7","0","0","1","0","1","0","63"],["福州","23","16","0","0","0","0","0","0","0","0","0","0","0","0","48"],["宁德","25","15","0","0","2","0","0","0","0","0","0","0","0","0","48"],["龙岩","16","13","0","0","2","0","0","0","0","0","0","0","0","0","42"],["三明","17","12","0","0","0","0","0","0","0","0","0","0","1","0","42"],["","","","","","","","","","","","","","","",""],["","","","","","","","","","","","","","","",""],["直报点","报送情况","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-8月得分"],["","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["思明","7","3","0","0","0","1","0","0","0","0","0","0","0","0","15"],["晋江","4","3","0","0","0","0","0","0","0","0","0","0","0","0","9"],["海沧","5","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["惠安","4","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["福清","2","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["仙游","2","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["新罗","5","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["武夷山","1","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["鼓楼","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["霞浦","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["龙海","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["永安","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]],"parsedAt":"2026-09-10T02:41:37.962Z"},"scoreFileName":"1-8月.xlsx","knowledge":[{"name":"动态类信息","overview":"选题：领导调研、阶段性经营成效、项目签约、节日营销、重大通信保障\n篇幅：500字左右为宜，原则上不超过1千字","categories":[{"name":"领导调研信息","items":[{"title":"写作结构","body":"第一部分：领导调研概况（时间、地点、主要行程、陪同人员）\n第二部分：领导在调研点考察情况\n第三部分：主要领导在调研过程或座谈交流中的讲话精神"}]},{"name":"阶段性经营成效信息","items":[{"title":"写作结构","body":"导语部分：用最简练的话点明时间、地点、主要成效等关键信息，进行要点式总结、数据化提炼\n\n主体部分：分段、分层次阐述主要举措，突出亮点，避免事无巨细"}]},{"name":"项目中标信息","items":[{"title":"写作结构","body":"导语部分：概括项目中标情况、中标金额，提炼项目亮点（比如引入自研能力、全省首个）及预期效果\n\n主体部分：分段介绍项目主要内容及日常运营保障情况，避免过多阐述打单的艰辛以及客情关系"}]},{"name":"通信保障信息","items":[{"title":"写作结构","body":"第一部分：受灾情况，着重体现通信设施受损情况（包括线路、杆路、基站退服、乡镇全阻、影响用户数等）\n\n第二部分：抗灾情况，包括抢修力量投入（人次、车辆、油机等）、领导靠前指挥、网络运行监测和维护、机房局站排水、光缆线路巡察、防汛物资储备、应急通信保障、配合政府发送公益短信等"}]}]},{"name":"综合类信息","overview":"选题：典型经验总结，可全省复制推广；调研报告、行业竞争分析及对策、供管理层决策参考的意见建议\n篇幅：1千字左右，原则上不超过2千字","categories":[{"name":"经验类","items":[{"title":"写作结构（两种）","body":"结构一：取得成效（量化成绩）+ 具体措施（分条叙述）\n\n结构二：取得成效（主要篇幅）+ 仍存在问题 + 改进方向\n\n要点：成效尽量量化、多维度展开对比；措施要体现\"创新性\"，可学习借鉴，避免记流水帐"}]},{"name":"问题分析类","items":[{"title":"写作结构","body":"指出问题/介绍背景 + 分析原因 + 提出对策\n\n要点：问题分析要透彻（不等于多），提出对策要切实可行\n\n更高标准：站在企业发展的角度，提炼核心价值点"}]}]}],"calendarText":"8-9月：校园营销、基础业务高质量发展\n10月：中秋国庆双节营销\n12月：元旦春节双节营销\n8-12月：落实2026党委攻克令","fontsize":"small","theme":"deepblue"};
+var PUB_DATA = {"points":[{"id":1786667727159,"createdAt":"2026-08-14T00:35:27.159Z","category":"近期信息要点","title":"渠道建营、场景化营销、战略平台插旗、AI+行动、Token经营、“一降两升”等领域阶段性成效","content":"","image":null,"updatedAt":"2026-08-14T07:44:35.455Z"},{"id":1786675983849,"category":"近期集团重点关注","title":"“息壤、Tokenhub、TeleAgent、智能化穿透式监管、低空、XC、视联网”等重点平台的市场卡位进展情况","content":"","image":null,"createdAt":"2026-08-14T02:53:03.849Z","updatedAt":"2026-08-14T07:44:07.718Z"}],"scoreData":{"sheetName":"Sheet1","tables":[{"title":"表格 1","rows":[["分公司","报送情况","采用率","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","省市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-9月得分"],["","","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["厦门","57","0.72","41","0","0","0","2","0","1","1","1","2","1","2","1","189"],["南平","30","1","29","1","0","0","2","0","22","0","0","1","0","2","3","165"],["漳州","28","0.79","21","1","0","0","2","0","2","0","0","3","2","1","1","117"],["泉州","39","0.79","31","0","0","0","1","0","2","1","0","1","0","0","0","114"],["莆田","17","1","16","1","0","0","0","0","7","0","0","1","0","1","0","75"],["宁德","32","0.69","20","0","0","2","0","0","0","0","0","0","0","0","0","63"],["福州","18","1","18","0","0","0","0","0","0","0","0","0","0","0","0","54"],["龙岩","18","1","16","0","0","2","0","0","0","0","0","0","0","0","0","51"],["三明","16","0.94","14","0","0","1","0","0","0","0","0","0","0","1","0","49.5"]],"tab":"地市","merges":[{"sr":1,"sc":1,"er":2,"ec":1},{"sr":1,"sc":2,"er":2,"ec":2},{"sr":1,"sc":3,"er":2,"ec":3},{"sr":1,"sc":10,"er":2,"ec":10},{"sr":1,"sc":11,"er":2,"ec":11},{"sr":1,"sc":12,"er":2,"ec":12},{"sr":1,"sc":17,"er":2,"ec":17}]},{"title":"表格 1","rows":[["直报点","报送情况","采用率","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-9月得分"],["","","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["思明","8","0.5","4","0","0","0","1","0","0","0","0","0","0","0","0","18"],["惠安","4","0.75","3","0","0","0","1","0","0","0","0","1","0","0","0","18"],["晋江","5","0.8","4","0","0","0","0","0","0","0","0","0","0","0","0","12"],["海沧","6","0.5","3","0","0","0","0","0","0","0","0","0","0","0","0","9"],["仙游","3","1","3","0","0","0","0","0","0","0","0","0","0","0","0","9"],["福清","2","1","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["新罗","6","0.17","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["武夷山","2","0.5","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["鼓楼","2","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["霞浦","1","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["永安","1","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["龙海","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]],"tab":"直报点","merges":[{"sr":1,"sc":1,"er":2,"ec":1},{"sr":1,"sc":2,"er":2,"ec":2},{"sr":1,"sc":3,"er":2,"ec":3},{"sr":1,"sc":10,"er":2,"ec":10},{"sr":1,"sc":11,"er":2,"ec":11},{"sr":1,"sc":12,"er":2,"ec":12},{"sr":1,"sc":17,"er":2,"ec":17}]}],"rawRows":[["分公司","报送情况","采用率","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","省市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-9月得分"],["","","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["厦门","57","0.72","41","0","0","0","2","0","1","1","1","2","1","2","1","189"],["南平","30","1","29","1","0","0","2","0","22","0","0","1","0","2","3","165"],["漳州","28","0.79","21","1","0","0","2","0","2","0","0","3","2","1","1","117"],["泉州","39","0.79","31","0","0","0","1","0","2","1","0","1","0","0","0","114"],["莆田","17","1","16","1","0","0","0","0","7","0","0","1","0","1","0","75"],["宁德","32","0.69","20","0","0","2","0","0","0","0","0","0","0","0","0","63"],["福州","18","1","18","0","0","0","0","0","0","0","0","0","0","0","0","54"],["龙岩","18","1","16","0","0","2","0","0","0","0","0","0","0","0","0","51"],["三明","16","0.94","14","0","0","1","0","0","0","0","0","0","0","1","0","49.5"],["","","","","","","","","","","","","","","","",""],["","","","","","","","","","","","","","","","",""],["直报点","报送情况","采用率","省公司采用","省公司采用","省公司采用","省公司采用","集团公司采用","集团公司采用","市政府采用","国务院国资委采用","省通管局采用","加 分 项 目","加 分 项 目","加 分 项 目","加 分 项 目","1-9月得分"],["","","","《电信信息》","《情况通报》","《决策参考》","《简讯》","《电信信息》","《决策参考》","","","","好信息","领导批示","工作报告案例","调研报告",""],["思明","8","0.5","4","0","0","0","1","0","0","0","0","0","0","0","0","18"],["惠安","4","0.75","3","0","0","0","1","0","0","0","0","1","0","0","0","18"],["晋江","5","0.8","4","0","0","0","0","0","0","0","0","0","0","0","0","12"],["海沧","6","0.5","3","0","0","0","0","0","0","0","0","0","0","0","0","9"],["仙游","3","1","3","0","0","0","0","0","0","0","0","0","0","0","0","9"],["福清","2","1","2","0","0","0","0","0","0","0","0","0","0","0","0","6"],["新罗","6","0.17","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["武夷山","2","0.5","1","0","0","0","0","0","0","0","0","0","0","0","0","3"],["鼓楼","2","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["霞浦","1","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["永安","1","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],["龙海","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]],"parsedAt":"2026-10-19T06:07:31.831Z"},"scoreFileName":"1-9月.xlsx","groupData":{"items":[{"title":"福建漳州分公司开通国库支付量子OTN加密专网","unit":"漳州","theme":"战新能力落地","tags":["战新能力落地"]},{"title":"福建厦门分公司中标亿级公共安全系统建设项目","unit":"厦门思明","theme":"千万大单","tags":["千万大单"]},{"title":"福建公司开通金融行业跨省量子OTN专网","unit":"政企信息服务事业群","theme":"战新能力落地","tags":["战新能力落地"]},{"title":"福建公司完成全省烟花爆竹批发点AI视频监控统一纳管","unit":"政企信息服务事业群","theme":"AI能力","tags":["AI能力"]},{"title":"福建厦门分公司签约千万级可信数据空间项目","unit":"厦门","theme":"战新能力落地、千万大单","tags":["战新能力落地","千万大单"]},{"title":"福建漳州分公司中标千万级台商区产业大脑项目","unit":"漳州","theme":"千万大单","tags":["千万大单"]},{"title":"福建南平分公司深耕城市治理一网统管项目取得积极成效","unit":"南平","theme":"行业深耕","tags":["行业深耕"]},{"title":"福建南平分公司中标六千万级智慧污水处理项目","unit":"南平","theme":"千万大单","tags":["千万大单"]},{"title":"福建公司以AI赋能客户服务提质增效","unit":"10000号客户服务中心","theme":"提质增效","tags":["提质增效"]},{"title":"福建公司承建全省高考考场AI巡查系统","unit":"政企信息服务事业群","theme":"AI能力","tags":["AI能力"]},{"title":"福建公司打造智算服务一体化平台推动Token销售服务落地","unit":"云中台","theme":"Token经营","tags":["Token经营"]},{"title":"福建泉州分公司中标两千万级县域智慧交通项目","unit":"泉州惠安","theme":"千万大单","tags":["千万大单"]},{"title":"中国电信全力做好台风“白海豚” 应急抢险通信保障工作","unit":"云网运营部、智能云网调度运营中心、政企信息服务事业群、10000号客户服务中心","theme":"通信保障","tags":["通信保障"]},{"title":"福建公司以“AI+风险防范”构建闭环监督体系","unit":"纪委办公室、党委巡察工作领导小组办公室、企业信息化中心","theme":"AI能力","tags":["AI能力"]},{"title":"福建公司打造数字员工提升装维工作效率","unit":"云网运营部","theme":"提质增效","tags":["提质增效"]},{"title":"福建公司以TeleAgent为抓手推进校园秋促营销取得积极成效","unit":"政企信息服务事业群","theme":"重点平台","tags":["重点平台"]}],"stats":[{"name":"千万大单","count":5},{"name":"战新能力落地","count":3},{"name":"AI能力","count":3},{"name":"提质增效","count":2},{"name":"行业深耕","count":1},{"name":"Token经营","count":1},{"name":"通信保障","count":1},{"name":"重点平台","count":1}],"parsedAt":"2026-10-19T10:29:37.862Z"},"groupFileName":"集团信息采用情况分析.xlsx","knowledge":[{"name":"动态类信息","overview":"选题：领导调研、阶段性经营成效、项目签约、节日营销、重大通信保障\n篇幅：500字左右为宜，原则上不超过1千字","categories":[{"name":"领导调研信息","items":[{"title":"写作结构","body":"第一部分：领导调研概况（时间、地点、主要行程、陪同人员）\n第二部分：领导在调研点考察情况\n第三部分：主要领导在调研过程或座谈交流中的讲话精神"}]},{"name":"阶段性经营成效信息","items":[{"title":"写作结构","body":"导语部分：用最简练的话点明时间、地点、主要成效等关键信息，进行要点式总结、数据化提炼\n\n主体部分：分段、分层次阐述主要举措，突出亮点，避免事无巨细"}]},{"name":"项目中标信息","items":[{"title":"写作结构","body":"导语部分：概括项目中标情况、中标金额，提炼项目亮点（比如引入自研能力、全省首个）及预期效果\n\n主体部分：分段介绍项目主要内容及日常运营保障情况，避免过多阐述打单的艰辛以及客情关系"}]},{"name":"通信保障信息","items":[{"title":"写作结构","body":"第一部分：受灾情况，着重体现通信设施受损情况（包括线路、杆路、基站退服、乡镇全阻、影响用户数等）\n\n第二部分：抗灾情况，包括抢修力量投入（人次、车辆、油机等）、领导靠前指挥、网络运行监测和维护、机房局站排水、光缆线路巡察、防汛物资储备、应急通信保障、配合政府发送公益短信等"}]}]},{"name":"综合类信息","overview":"选题：典型经验总结，可全省复制推广；调研报告、行业竞争分析及对策、供管理层决策参考的意见建议\n篇幅：1千字左右，原则上不超过2千字","categories":[{"name":"经验类","items":[{"title":"写作结构（两种）","body":"结构一：取得成效（量化成绩）+ 具体措施（分条叙述）\n\n结构二：取得成效（主要篇幅）+ 仍存在问题 + 改进方向\n\n要点：成效尽量量化、多维度展开对比；措施要体现\"创新性\"，可学习借鉴，避免记流水帐"}]},{"name":"问题分析类","items":[{"title":"写作结构","body":"指出问题/介绍背景 + 分析原因 + 提出对策\n\n要点：问题分析要透彻（不等于多），提出对策要切实可行\n\n更高标准：站在企业发展的角度，提炼核心价值点"}]}]}],"calendarText":"8-9月：校园营销、基础业务高质量发展\n10月：中秋国庆双节营销\n12月：元旦春节双节营销\n8-12月：落实2026党委攻克令","fontsize":"small","theme":"deepblue"};
 var currentPage = "points";
 var currentScoreTab = 0;
 var currentKbL1 = 0;
 var currentKbL2 = 0;
-var SCORE_TABS = ["地市","直报点"];
+var SCORE_TABS = ["地市","直报点","信息得分规则"];
 
 function _esc(s){ if(s==null) return ""; return String(s).replace(/&/g,"\x26amp;").replace(/</g,"\x26lt;").replace(/>/g,"\x26gt;").replace(/"/g,"\x26quot;"); }
 function _fd(iso){ if(!iso) return ""; var d=new Date(iso); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
 function _parseCS(text){ var lines=text.split("\n").filter(function(l){return l.trim();}); var spans=[]; for(var i=0;i<lines.length;i++){ var line=lines[i].trim(); var m=line.match(/(\d+)\s*[-\u2014\uff5e\~\u81f3]\s*(\d+)\s*\u6708[\uff1a:\uff1a]\s*(.+)/); if(m){ spans.push({monthLabel:m[1]+"-"+m[2]+"\u6708",content:m[3].trim()}); continue; } var m2=line.match(/(\d+)\s*\u6708[\uff1a:\uff1a]\s*(.+)/); if(m2){ spans.push({monthLabel:m2[1]+"\u6708",content:m2[2].trim()}); } } return spans; }
 function updateDate(){ var now=new Date(); var days=["日","一","二","三","四","五","六"]; document.getElementById("topbarDate").textContent=now.getFullYear()+"年"+(now.getMonth()+1)+"月"+now.getDate()+"日 周"+days[now.getDay()]; }
 
-function renderPage(){ var c=document.getElementById("content"); if(currentPage==="points") renderPoints(c); else if(currentPage==="scores") renderScores(c); else if(currentPage==="knowledge") renderKnowledge(c); }
+function renderPage(){ var c=document.getElementById("content"); if(currentPage==="points") renderPoints(c); else if(currentPage==="scores") renderScores(c); else if(currentPage==="groupstats") renderGroupStats(c); else if(currentPage==="knowledge") renderKnowledge(c); }
 
 function renderPoints(c){
   var points=PUB_DATA.points||[]; var h="";
@@ -368,7 +420,8 @@ function renderScores(c){
   var data=PUB_DATA.scoreData; var h="";
   if(PUB_DATA.scoreFileName) h+="<span style=\"font-size:calc(var(--fs-base)-2px);color:var(--text-muted);margin-bottom:16px;display:block\">"+_esc(PUB_DATA.scoreFileName)+"</span>";
   if(!data||!data.tables||!data.tables.length){ h+="<div class=\"card\"><div class=\"empty-state\"><p>暂无得分数据</p></div></div>"; c.innerHTML=h; return; }
-  h+="<div class=\"score-tabs\"><div class=\"score-tab"+(currentScoreTab===0?" active":"")+"\" onclick=\"switchScoreTab(0)\">地市</div><div class=\"score-tab"+(currentScoreTab===1?" active":"")+"\" onclick=\"switchScoreTab(1)\">直报点</div></div>";
+  h+="<div class=\"score-tabs\"><div class=\"score-tab"+(currentScoreTab===0?" active":"")+"\" onclick=\"switchScoreTab(0)\">地市</div><div class=\"score-tab"+(currentScoreTab===1?" active":"")+"\" onclick=\"switchScoreTab(1)\">直报点</div><div class=\"score-tab"+(currentScoreTab===2?" active":"")+"\" onclick=\"switchScoreTab(2)\">信息得分规则</div></div>";
+  if(currentScoreTab===2){ h+=_scoreRules(); c.innerHTML=h; return; }
   var tabName=SCORE_TABS[currentScoreTab]||"地市";
   var tables=data.tables.filter(function(t){return t.tab===tabName;});
   if(!tables.length) tables=data.tables;
@@ -387,7 +440,9 @@ function _rST(table,idx){
   for(var r=1;r<table.rows.length;r++){ h+="<tr>";
     for(var ci=0;ci<table.rows[r].length;ci++){ var cls="";
       if(ci===0||(header[ci]&&/排名|名次|序号/i.test(String(header[ci])))){ var num=parseInt(table.rows[r][ci]); if(num===1) cls=" rank-1"; else if(num===2) cls=" rank-2"; else if(num===3) cls=" rank-3"; }
-      h+="<td class=\""+cls.trim()+"\">"+_esc(String(table.rows[r][ci]))+"</td>";
+      var cellText=table.rows[r][ci]; var disp=String(cellText);
+      if(header[ci]&&/采用率|采纳率/i.test(String(header[ci]))){ if(typeof cellText==="number"&&cellText>=0&&cellText<=1){ disp=Math.round(cellText*100)+"%"; } else if(/^-?\d+(\.\d+)?$/.test(String(cellText).trim())){ var nn=parseFloat(cellText); if(nn>=0&&nn<=1) disp=Math.round(nn*100)+"%"; } }
+      h+="<td class=\""+cls.trim()+"\">"+_esc(disp)+"</td>";
     }
     h+="</tr>";
   }
@@ -395,6 +450,85 @@ function _rST(table,idx){
 }
 
 function switchScoreTab(idx){ currentScoreTab=idx; renderPage(); }
+
+var currentGsTheme="";
+
+function renderGroupStats(c){
+  var data=PUB_DATA.groupData; var h="";
+  if(PUB_DATA.groupFileName) h+="<span style=\"font-size:calc(var(--fs-base)-2px);color:var(--text-muted);margin-bottom:16px;display:block\">"+_esc(PUB_DATA.groupFileName)+"</span>";
+  if(!data||!data.stats||!data.stats.length){ c.innerHTML=h+"<div class=\"card\"><div class=\"empty-state\"><p>暂无集团信息采用数据</p></div></div>"; return; }
+  var totalTags=0; for(var i=0;i<data.stats.length;i++) totalTags+=data.stats[i].count;
+  h+="<div class=\"card gs-summary-card\">"
+    +"<div class=\"gs-summary-item\"><div class=\"gs-summary-num\">"+data.items.length+"</div><div class=\"gs-summary-label\">采用篇目</div></div>"
+    +"<div class=\"gs-summary-item\"><div class=\"gs-summary-num\">"+data.stats.length+"</div><div class=\"gs-summary-label\">题材类别</div></div>"
+    +"<div class=\"gs-summary-item\"><div class=\"gs-summary-num\">"+totalTags+"</div><div class=\"gs-summary-label\">题材标记数</div></div>"
+  +"</div>";
+  h+=_gChart(data);
+  h+="<div id=\"gsDetail\"></div>";
+  c.innerHTML=h;
+  if(currentGsTheme){
+    var ok=false; for(var k=0;k<data.stats.length;k++){ if(data.stats[k].name===currentGsTheme){ ok=true; break; } }
+    if(ok){ var box=document.getElementById("gsDetail"); if(box) box.innerHTML=_gDetail(PUB_DATA.groupData,currentGsTheme); } else { currentGsTheme=""; }
+  }
+}
+
+function _gDetail(data,name){
+  var list=[]; for(var i=0;i<data.items.length;i++){ var it=data.items[i]; if(it.tags){ for(var t=0;t<it.tags.length;t++){ if(it.tags[t]===name){ list.push(it); break; } } } }
+  var h="<div class=\"card gs-detail-card\"><div class=\"gs-detail-title\">"+_esc(name)+" · 题材明细</div><div class=\"gs-detail-count\">共 "+list.length+" 篇</div><div class=\"gs-detail-list\">";
+  for(var j=0;j<list.length;j++){
+    h+="<div class=\"gs-detail-item\"><span class=\"gs-detail-idx\">"+(j+1)+"</span><div class=\"gs-detail-body\"><div class=\"gs-detail-name\">"+_esc(list[j].title||"（无篇名）")+"</div>";
+    if(list[j].unit) h+="<div class=\"gs-detail-unit\">"+_esc(list[j].unit)+"</div>";
+    h+="</div></div>";
+  }
+  h+="</div></div>"; return h;
+}
+
+function _gsTheme(name){
+  var data=PUB_DATA.groupData; var box=document.getElementById("gsDetail");
+  if(!box||!data||!data.items) return;
+  if(currentGsTheme===name){ currentGsTheme=""; } else { currentGsTheme=name; }
+  var els=document.querySelectorAll(".gs-bar-item");
+  for(var i=0;i<els.length;i++){ if(els[i].getAttribute("data-theme")===currentGsTheme){ els[i].className="gs-bar-item selected"; } else { els[i].className="gs-bar-item"; } }
+  if(!currentGsTheme){ box.innerHTML=""; return; }
+  box.innerHTML=_gDetail(data,currentGsTheme);
+}
+
+function _gChart(data){
+  var stats=data.stats; var maxCount=stats[0].count;
+  for(var i=1;i<stats.length;i++){ if(stats[i].count>maxCount) maxCount=stats[i].count; }
+  var colors=["#1E88E5","#1565C0","#283593","#3F51B5","#00838F","#00ACC1","#0097A7","#5C6BC0"];
+  var h="<div class=\"card\"><div class=\"gs-chart-title\">各题材采用篇目数</div><div class=\"gs-chart-wrap\"><div class=\"gs-bar-chart\">";
+  for(var j=0;j<stats.length;j++){
+    var pct=Math.round(stats[j].count/maxCount*100);
+    var color=colors[j%colors.length];
+    var sel=(stats[j].name===currentGsTheme)?" selected":"";
+    h+="<div class=\"gs-bar-item"+sel+"\" data-theme=\""+_esc(stats[j].name)+"\" onclick=\"_gsTheme(this.getAttribute('data-theme'))\" title=\""+_esc(stats[j].name)+"："+stats[j].count+"篇，点击查看明细\">"
+      +"<div class=\"gs-bar-value\">"+stats[j].count+"</div>"
+      +"<div class=\"gs-bar-track\"><div class=\"gs-bar-fill\" style=\"height:"+pct+"%;background:"+color+"\"></div></div>"
+      +"<div class=\"gs-bar-label\">"+_esc(stats[j].name)+"</div>"
+    +"</div>";
+  }
+  h+="</div><div class=\"gs-chart-hint\">横轴：被集团采用题材；纵轴：篇目数量（点击柱子查看明细）</div></div></div>";
+  return h;
+}
+
+function _scoreRules(){
+  var h="<div class=\"card score-rules-card\">";
+  h+="<div class=\"score-rules-title\">信息得分规则</div>";
+  h+="<div class=\"score-rules-section\"><div class=\"score-rules-head\">（一）基础分</div>";
+  h+="<p>省公司《电信信息》采用的，信息每条3分，简讯每条1.5分；《情况通报》采用的，每条6分；《决策参考》采用的，每条10分。</p>";
+  h+="<p>集团公司《电信信息》采用的，每条6分；《决策参考》采用的，每条15分。</p>";
+  h+="<p>省政府办公厅《今日要讯》采用的，每条12分。</p>";
+  h+="<p>福建省通信管理局《福建通信信息》采用的，每条3分。</p>";
+  h+="<p>地方政府刊物（包括市委市政府官网、政务内网或市委市政府办公室编发的纸质刊物）采用的，每条1分。</p>";
+  h+="</div>";
+  h+="<div class=\"score-rules-section\"><div class=\"score-rules-head\">（二）加扣分项目</div>";
+  h+="<p>信息得到省公司领导批示，每条加3分/人次；得到集团公司领导批示，每条加6分/人次。</p>";
+  h+="<p>信息被评为好信息一等奖，每条加5分；被评为好信息二等奖，每条加3分。</p>";
+  h+="<p>信息或综合文字材料被年度和半年工作报告案例采用的，每篇加6分。</p>";
+  h+="<p>各市级分公司办公室每季度牵头组织1次以上信息调研，并完成调研报告的，每篇报告加6分。</p>";
+  h+="</div></div>"; return h;
+}
 
 function renderKnowledge(c){
   var kb=PUB_DATA.knowledge;
